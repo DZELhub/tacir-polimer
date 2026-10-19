@@ -98,11 +98,11 @@ export default function About() {
 
         <div
           className={[
-            "relative aspect-[16/9]",
+            "relative aspect-video",
             "overflow-hidden rounded-xl",
             "bg-sage",
-            "sm:aspect-[16/10]",
-            "lg:aspect-[4/3]",
+            "sm:aspect-16/10",
+            "lg:aspect-4/3",
           ].join(" ")}
         >
           <Image
