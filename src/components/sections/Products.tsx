@@ -1,11 +1,8 @@
-
 "use client";
+import { useTranslations } from "next-intl";
 
 import Image from "next/image";
-import {
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState, useRef } from "react";
 
 type Product = {
   code: string;
@@ -15,155 +12,151 @@ type Product = {
   image: string;
 };
 
-const products: Product[] = [
-  {
-    code: "PET",
-    name: "Polyethylene Terephthalate",
-    description:
-      "A versatile thermoplastic widely used " +
-      "in packaging and fiber applications.",
-    applications: [
-      "Bottles and containers",
-      "Food packaging",
-      "Polyester fibers",
-    ],
-    image: "/images/products/pet.webp",
-  },
-  {
-    code: "PP",
-    name: "Polypropylene",
-    description:
-      "A lightweight polymer valued for " +
-      "its chemical resistance and versatility.",
-    applications: [
-      "Rigid packaging",
-      "Automotive components",
-      "Household products",
-    ],
-    image: "/images/products/pp.webp",
-  },
-  {
-    code: "PS",
-    name: "Polystyrene",
-    description:
-      "A widely used polymer suitable for " +
-      "rigid packaging and consumer products.",
-    applications: [
-      "Food containers",
-      "Disposable products",
-      "Consumer goods",
-    ],
-    image: "/images/products/ps.webp",
-  },
-  {
-    code: "HIPS",
-    name: "High Impact Polystyrene",
-    description:
-      "A modified polystyrene designed " +
-      "for improved impact resistance.",
-    applications: [
-      "Appliance housings",
-      "Electronic enclosures",
-      "Thermoformed packaging",
-    ],
-    image: "/images/products/hips.webp",
-  },
-  {
-    code: "EPS",
-    name: "Expanded Polystyrene",
-    description:
-      "A lightweight cellular material " +
-      "known for insulation and cushioning.",
-    applications: [
-      "Thermal insulation",
-      "Protective packaging",
-      "Construction products",
-    ],
-    image: "/images/products/eps.webp",
-  },
-  {
-    code: "POM",
-    name: "Polyoxymethylene",
-    description:
-      "An engineering thermoplastic " +
-      "suited to precision mechanical parts.",
-    applications: [
-      "Gears and bearings",
-      "Precision components",
-      "Industrial mechanisms",
-    ],
-    image: "/images/products/pom.webp",
-  },
-  {
-    code: "ABS",
-    name: "Acrylonitrile Butadiene Styrene",
-    description:
-      "A durable engineering polymer " +
-      "combining toughness and processability.",
-    applications: [
-      "Automotive components",
-      "Electronic housings",
-      "Consumer products",
-    ],
-    image: "/images/products/abs.webp",
-  },
-  {
-    code: "PE",
-    name: "Polyethylene",
-    description:
-      "A widely used polymer family " +
-      "offering flexibility and durability.",
-    applications: [
-      "Films and bags",
-      "Pipes and containers",
-      "Industrial packaging",
-    ],
-    image: "/images/products/pe.webp",
-  },
-];
-
 export default function Products() {
-  const [selected, setSelected] =
-    useState<Product | null>(null);
+  const t = useTranslations("Products");
+  const common = useTranslations("Common");
+  const dialog = useRef<HTMLDivElement>(null);
+
+  const products: Product[] = [
+    {
+      code: "PET",
+      name: t("polyethylene_terephthalate"),
+      description: t("a_versatile_thermoplastic_widely_used_in_packaging"),
+      applications: [
+        t("bottles_and_containers"),
+        t("food_packaging"),
+        t("polyester_fibers"),
+      ],
+      image: "/images/products/pet.webp",
+    },
+    {
+      code: "PP",
+      name: t("polypropylene"),
+      description: t("a_lightweight_polymer_valued_for_its_chemical"),
+      applications: [
+        t("rigid_packaging"),
+        t("automotive_components"),
+        t("household_products"),
+      ],
+      image: "/images/products/pp.webp",
+    },
+    {
+      code: "PS",
+      name: t("polystyrene"),
+      description: t("a_widely_used_polymer_suitable_for_rigid"),
+      applications: [
+        t("food_containers"),
+        t("disposable_products"),
+        t("consumer_goods"),
+      ],
+      image: "/images/products/ps.webp",
+    },
+    {
+      code: "HIPS",
+      name: t("high_impact_polystyrene"),
+      description: t("a_modified_polystyrene_designed_for_improved_impact"),
+      applications: [
+        t("appliance_housings"),
+        t("electronic_enclosures"),
+        t("thermoformed_packaging"),
+      ],
+      image: "/images/products/hips.webp",
+    },
+    {
+      code: "EPS",
+      name: t("expanded_polystyrene"),
+      description: t("a_lightweight_cellular_material_known_for_insulation"),
+      applications: [
+        t("thermal_insulation"),
+        t("protective_packaging"),
+        t("construction_products"),
+      ],
+      image: "/images/products/eps.webp",
+    },
+    {
+      code: "POM",
+      name: t("polyoxymethylene"),
+      description: t(
+        "an_engineering_thermoplastic_suited_to_precision_mechanical",
+      ),
+      applications: [
+        t("gears_and_bearings"),
+        t("precision_components"),
+        t("industrial_mechanisms"),
+      ],
+      image: "/images/products/pom.webp",
+    },
+    {
+      code: "ABS",
+      name: t("acrylonitrile_butadiene_styrene"),
+      description: t("a_durable_engineering_polymer_combining_toughness_and"),
+      applications: [
+        t("automotive_components"),
+        t("electronic_housings"),
+        t("consumer_products"),
+      ],
+      image: "/images/products/abs.webp",
+    },
+    {
+      code: "PE",
+      name: t("polyethylene"),
+      description: t("a_widely_used_polymer_family_offering_flexibility"),
+      applications: [
+        t("films_and_bags"),
+        t("pipes_and_containers"),
+        t("industrial_packaging"),
+      ],
+      image: "/images/products/pe.webp",
+    },
+  ];
+
+  const [selectedCode, setSelectedCode] = useState<string | null>(null);
+  const selected =
+    products.find((product) => product.code === selectedCode) ?? null;
 
   useEffect(() => {
-    if (!selected) return;
+    if (!selectedCode) return;
 
-    const previousOverflow =
-      document.body.style.overflow;
+    const trigger =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
+    dialog.current?.querySelector<HTMLButtonElement>("button")?.focus();
+    const previousOverflow = document.body.style.overflow;
 
-    document.body.style.overflow =
-      "hidden";
+    document.body.style.overflow = "hidden";
 
-    const handleEscape = (
-      event: KeyboardEvent
-    ) => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Tab") {
+        const controls =
+          dialog.current?.querySelectorAll<HTMLElement>("button, a[href]");
+        const first = controls?.[0];
+        const last = controls?.[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
+      }
       if (event.key === "Escape") {
-        setSelected(null);
+        setSelectedCode(null);
       }
     };
 
-    window.addEventListener(
-      "keydown",
-      handleEscape
-    );
+    window.addEventListener("keydown", handleEscape);
 
     return () => {
-      document.body.style.overflow =
-        previousOverflow;
+      trigger?.focus({ preventScroll: true });
+      document.body.style.overflow = previousOverflow;
 
-      window.removeEventListener(
-        "keydown",
-        handleEscape
-      );
+      window.removeEventListener("keydown", handleEscape);
     };
-  }, [selected]);
+  }, [selectedCode]);
 
   return (
-    <section
-      id="products"
-      className="bg-surface py-12 lg:py-20"
-    >
+    <section id="products" className="bg-sage py-12 lg:py-20">
       <div className="container-custom">
         <div className="mb-7 max-w-2xl lg:mb-10">
           <p
@@ -173,7 +166,7 @@ export default function Products() {
               "text-forest",
             ].join(" ")}
           >
-            OUR PRODUCTS
+            {t("our_products")}
           </p>
 
           <h2
@@ -184,7 +177,7 @@ export default function Products() {
               "sm:text-4xl",
             ].join(" ")}
           >
-            Polymer Solutions
+            {t("polymer_solutions")}
           </h2>
 
           <p
@@ -194,27 +187,23 @@ export default function Products() {
               "sm:text-base",
             ].join(" ")}
           >
-            Explore our polymer portfolio
-            and discover materials for
-            diverse industrial applications.
+            {t("explore_our_polymer_portfolio_and_discover_materials")}
           </p>
         </div>
 
         <div
-  className={[
-    "grid grid-cols-2",
-    "gap-3 sm:gap-4",
-    "lg:grid-cols-4",
-    "lg:gap-5",
-  ].join(" ")}
->
+          className={[
+            "grid grid-cols-2",
+            "gap-3 sm:gap-4",
+            "lg:grid-cols-4",
+            "lg:gap-5",
+          ].join(" ")}
+        >
           {products.map((product) => (
             <button
               key={product.code}
               type="button"
-              onClick={() =>
-                setSelected(product)
-              }
+              onClick={() => setSelectedCode(product.code)}
               className={[
                 "group overflow-hidden",
                 "rounded-xl bg-white",
@@ -230,20 +219,18 @@ export default function Products() {
               ].join(" ")}
             >
               <div
-  className={[
-    "relative aspect-4/3",
-    "overflow-hidden bg-sage",
-    "sm:aspect-5/3",
-  ].join(" ")}
->
+                className={[
+                  "relative aspect-4/3",
+                  "overflow-hidden bg-sage",
+                  "sm:aspect-5/3",
+                ].join(" ")}
+              >
                 <Image
                   src={product.image}
-                  alt={
-                    `${product.code} polymer`
-                  }
+                  alt={common("polymer", { code: product.code })}
                   fill
                   sizes={[
-                    "(max-width: 639px) 100vw,",
+                    "(max-width: 639px) 50vw,",
                     "(max-width: 1023px) 50vw,",
                     "25vw",
                   ].join(" ")}
@@ -256,46 +243,42 @@ export default function Products() {
                 />
               </div>
 
-              
-<div className="p-3 sm:p-4 lg:p-5">
-  <p
-    className={[
-      "font-heading font-bold",
-      "text-base text-brand",
-      "sm:text-lg lg:text-xl",
-    ].join(" ")}
-  >
-    {product.code}
-  </p>
+              <div className="p-3 sm:p-4 lg:p-5">
+                <p
+                  className={[
+                    "font-heading font-bold",
+                    "text-base text-brand",
+                    "sm:text-lg lg:text-xl",
+                  ].join(" ")}
+                >
+                  {product.code}
+                </p>
 
-  <p
-    className={[
-      "mt-1 min-h-10",
-      "text-[11px] leading-4",
-      "text-charcoal/70",
-      "sm:text-xs sm:leading-5",
-      "lg:text-sm",
-    ].join(" ")}
-  >
-    {product.name}
-  </p>
+                <p
+                  className={[
+                    "mt-1 min-h-10 [overflow-wrap:anywhere]",
+                    "text-[11px] leading-4",
+                    "text-charcoal/70",
+                    "sm:text-xs sm:leading-5",
+                    "lg:text-sm",
+                  ].join(" ")}
+                >
+                  {product.name}
+                </p>
 
-  <span
-    className={[
-      "mt-3 inline-flex",
-      "items-center gap-1",
-      "text-[10px] font-semibold",
-      "text-forest",
-      "sm:mt-4 sm:text-xs",
-    ].join(" ")}
-  >
-    View Details
-    <span aria-hidden="true">
-      ↗
-    </span>
-  </span>
-</div>
-
+                <span
+                  className={[
+                    "mt-3 inline-flex",
+                    "items-center gap-1",
+                    "text-[10px] font-semibold",
+                    "text-forest",
+                    "sm:mt-4 sm:text-xs",
+                  ].join(" ")}
+                >
+                  {t("view_details")}
+                  <span aria-hidden="true">↗</span>
+                </span>
+              </div>
             </button>
           ))}
         </div>
@@ -310,15 +293,13 @@ export default function Products() {
             "bg-black/60 p-4",
           ].join(" ")}
           onMouseDown={(event) => {
-            if (
-              event.target ===
-              event.currentTarget
-            ) {
-              setSelected(null);
+            if (event.target === event.currentTarget) {
+              setSelectedCode(null);
             }
           }}
         >
           <div
+            ref={dialog}
             role="dialog"
             aria-modal="true"
             aria-labelledby="product-title"
@@ -334,10 +315,8 @@ export default function Products() {
           >
             <button
               type="button"
-              onClick={() =>
-                setSelected(null)
-              }
-              aria-label="Close details"
+              onClick={() => setSelectedCode(null)}
+              aria-label={t("close_details")}
               className={[
                 "absolute right-4 top-4",
                 "z-10 flex h-9 w-9",
@@ -353,11 +332,7 @@ export default function Products() {
               ✕
             </button>
 
-            <div
-              className={[
-                "grid md:grid-cols-2",
-              ].join(" ")}
-            >
+            <div className={["grid md:grid-cols-2"].join(" ")}>
               <div
                 className={[
                   "relative aspect-5/4",
@@ -368,14 +343,9 @@ export default function Products() {
               >
                 <Image
                   src={selected.image}
-                  alt={
-                    `${selected.code} polymer`
-                  }
+                  alt={common("polymer", { code: selected.code })}
                   fill
-                  sizes={[
-                    "(max-width: 767px) 100vw,",
-                    "50vw",
-                  ].join(" ")}
+                  sizes={["(max-width: 767px) 100vw,", "50vw"].join(" ")}
                   className="object-cover"
                 />
               </div>
@@ -390,7 +360,7 @@ export default function Products() {
                     "text-forest",
                   ].join(" ")}
                 >
-                  POLYMER PORTFOLIO
+                  {t("polymer_portfolio")}
                 </p>
 
                 <h3
@@ -424,12 +394,9 @@ export default function Products() {
                 </p>
 
                 <h4
-                  className={[
-                    "mt-6 text-sm",
-                    "font-bold text-brand",
-                  ].join(" ")}
+                  className={["mt-6 text-sm", "font-bold text-brand"].join(" ")}
                 >
-                  Typical Applications
+                  {t("typical_applications")}
                 </h4>
 
                 <ul
@@ -439,32 +406,22 @@ export default function Products() {
                     "text-charcoal/75",
                   ].join(" ")}
                 >
-                  {selected.applications.map(
-                    (application) => (
-                      <li
-                        key={application}
-                        className={[
-                          "flex items-start",
-                          "gap-2",
-                        ].join(" ")}
-                      >
-                        <span
-                          className="text-forest"
-                          aria-hidden="true"
-                        >
-                          •
-                        </span>
-                        {application}
-                      </li>
-                    )
-                  )}
+                  {selected.applications.map((application) => (
+                    <li
+                      key={application}
+                      className={["flex items-start", "gap-2"].join(" ")}
+                    >
+                      <span className="text-forest" aria-hidden="true">
+                        •
+                      </span>
+                      {application}
+                    </li>
+                  ))}
                 </ul>
 
                 <a
                   href="#contact"
-                  onClick={() =>
-                    setSelected(null)
-                  }
+                  onClick={() => setSelectedCode(null)}
                   className={[
                     "mt-8 inline-flex",
                     "items-center",
@@ -476,11 +433,8 @@ export default function Products() {
                     "hover:bg-forest",
                   ].join(" ")}
                 >
-                  Request Information
-                  <span
-                    className="ml-2"
-                    aria-hidden="true"
-                  >
+                  {t("request_information")}
+                  <span className="ml-2" aria-hidden="true">
                     ↗
                   </span>
                 </a>

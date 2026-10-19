@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 
 import {
   ArrowUpRight,
@@ -6,55 +7,43 @@ import {
   SearchCheck,
 } from "lucide-react";
 
-const solutions = [
-  {
-    number: "01",
-    title: "Polymer Trading",
-    description:
-      "Connecting businesses with polymer " +
-      "materials through international " +
-      "trading relationships and a " +
-      "market-focused approach.",
-    icon: ArrowLeftRight,
-  },
-  {
-    number: "02",
-    title: "Recycling Initiatives",
-    description:
-      "Exploring recycling-oriented " +
-      "material opportunities to support " +
-      "more resource-conscious " +
-      "industrial practices.",
-    icon: Recycle,
-  },
-  {
-    number: "03",
-    title: "Custom Sourcing",
-    description:
-      "Helping businesses identify " +
-      "polymer materials that align " +
-      "with their specific requirements " +
-      "and applications.",
-    icon: SearchCheck,
-  },
-];
-
 export default function Solutions() {
+  const t = useTranslations("Solutions");
+
+  const solutions = [
+    {
+      number: "01",
+      title: t("polymer_trading"),
+      description: t(
+        "connecting_businesses_with_polymer_materials_through_international",
+      ),
+      icon: ArrowLeftRight,
+    },
+    {
+      number: "02",
+      title: t("recycling_initiatives"),
+      description: t(
+        "exploring_recyclingoriented_material_opportunities_to_support_more",
+      ),
+      icon: Recycle,
+    },
+    {
+      number: "03",
+      title: t("custom_sourcing"),
+      description: t(
+        "helping_businesses_identify_polymer_materials_that_align",
+      ),
+      icon: SearchCheck,
+    },
+  ];
+
   return (
     <section
       id="solutions"
-      className={[
-        "scroll-mt-20 bg-surface",
-        "py-10 sm:py-12 lg:py-20",
-      ].join(" ")}
+      className={["bg-surface", "py-10 sm:py-12 lg:py-20"].join(" ")}
     >
       <div className="container-custom">
-        <div
-          className={[
-            "mb-6 max-w-2xl",
-            "lg:mb-12",
-          ].join(" ")}
-        >
+        <div className={["mb-6 max-w-2xl", "lg:mb-12"].join(" ")}>
           <p
             className={[
               "mb-2 text-[11px]",
@@ -64,7 +53,7 @@ export default function Solutions() {
               "lg:mb-3",
             ].join(" ")}
           >
-            WHAT WE DO
+            {t("what_we_do")}
           </p>
 
           <h2
@@ -75,7 +64,7 @@ export default function Solutions() {
               "sm:text-4xl",
             ].join(" ")}
           >
-            Our Solutions
+            {t("our_solutions")}
           </h2>
 
           <p
@@ -86,21 +75,13 @@ export default function Solutions() {
               "sm:text-base",
             ].join(" ")}
           >
-            Supporting industrial
-            businesses through polymer
-            trading, material sourcing,
-            and responsible resource
-            initiatives.
+            {t(
+              "supporting_industrial_businesses_through_polymer_trading_material",
+            )}
           </p>
         </div>
 
-        <div
-          className={[
-            "grid gap-3",
-            "md:grid-cols-3",
-            "lg:gap-5",
-          ].join(" ")}
-        >
+        <div className={["grid gap-3", "md:grid-cols-3", "lg:gap-5"].join(" ")}>
           {solutions.map((solution) => {
             const Icon = solution.icon;
 
@@ -136,19 +117,10 @@ export default function Solutions() {
                       "lg:h-12 lg:w-12",
                     ].join(" ")}
                   >
-                    <Icon
-                      size={21}
-                      strokeWidth={1.6}
-                      aria-hidden="true"
-                    />
+                    <Icon size={21} strokeWidth={1.6} aria-hidden="true" />
                   </div>
 
-                  <div
-                    className={[
-                      "min-w-0 flex-1",
-                      "md:hidden",
-                    ].join(" ")}
-                  >
+                  <div className={["min-w-0 flex-1", "md:hidden"].join(" ")}>
                     <h3
                       className={[
                         "font-heading text-base",
@@ -177,11 +149,8 @@ export default function Solutions() {
                         "text-forest",
                       ].join(" ")}
                     >
-                      Get in Touch
-                      <ArrowUpRight
-                        size={14}
-                        aria-hidden="true"
-                      />
+                      {t("get_in_touch")}
+                      <ArrowUpRight size={14} aria-hidden="true" />
                     </a>
                   </div>
 
@@ -235,11 +204,8 @@ export default function Solutions() {
                       "underline-offset-4",
                     ].join(" ")}
                   >
-                    Get in Touch
-                    <ArrowUpRight
-                      size={15}
-                      aria-hidden="true"
-                    />
+                    {t("get_in_touch")}
+                    <ArrowUpRight size={15} aria-hidden="true" />
                   </a>
                 </div>
               </article>

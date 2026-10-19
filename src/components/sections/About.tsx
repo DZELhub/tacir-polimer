@@ -1,14 +1,13 @@
+import { useTranslations } from "next-intl";
 
 import Image from "next/image";
 
 export default function About() {
+  const t = useTranslations("About");
   return (
     <section
       id="about"
-      className={[
-        "scroll-mt-20 bg-white",
-        "py-10 sm:py-14 lg:py-24",
-      ].join(" ")}
+      className={["bg-white", "py-10 sm:py-14 lg:py-24"].join(" ")}
     >
       <div
         className={[
@@ -28,7 +27,7 @@ export default function About() {
               "lg:text-xs",
             ].join(" ")}
           >
-            ABOUT TACIR POLIMER
+            {t("about_tacir_polimer")}
           </p>
 
           <h2
@@ -41,9 +40,7 @@ export default function About() {
               "lg:text-[2.65rem]",
             ].join(" ")}
           >
-            Connecting Industries
-            Through Reliable
-            Polymer Trade.
+            {t("connecting_industries_through_reliable_polymer_trade")}
           </h2>
 
           <div
@@ -56,22 +53,9 @@ export default function About() {
               "sm:text-base sm:leading-7",
             ].join(" ")}
           >
-            <p>
-              Tacir Polimer operates in
-              polymer trading and sourcing,
-              connecting businesses with
-              materials suited to their
-              industrial requirements.
-            </p>
+            <p>{t("tacir_polimer_operates_in_polymer_trading_and")}</p>
 
-            <p>
-              Through a focus on reliable
-              partnerships, market knowledge,
-              and responsive communication,
-              we aim to support long-term
-              relationships across
-              international markets.
-            </p>
+            <p>{t("through_a_focus_on_reliable_partnerships_market")}</p>
           </div>
 
           <a
@@ -89,10 +73,8 @@ export default function About() {
               "sm:py-3 sm:text-sm",
             ].join(" ")}
           >
-            Discover Our Solutions
-            <span aria-hidden="true">
-              ↗
-            </span>
+            {t("discover_our_solutions")}
+            <span aria-hidden="true">↗</span>
           </a>
         </div>
 
@@ -106,18 +88,10 @@ export default function About() {
           ].join(" ")}
         >
           <Image
-            src={
-              "/images/about/polymer-trading.webp"
-            }
-            alt={
-              "Polymer materials and " +
-              "international trading logistics"
-            }
+            src={"/images/about/polymer-trading.webp"}
+            alt={t("polymer_materials_and_international_trading_logistics")}
             fill
-            sizes={[
-              "(max-width: 1023px) 100vw,",
-              "50vw",
-            ].join(" ")}
+            sizes={["(max-width: 1023px) 100vw,", "50vw"].join(" ")}
             className="object-cover"
           />
         </div>

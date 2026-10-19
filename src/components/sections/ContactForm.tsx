@@ -1,39 +1,36 @@
-
 "use client";
+import { useTranslations } from "next-intl";
 
-import {
-  useState,
-  type FormEvent,
-} from "react";
+import { useState, type FormEvent } from "react";
 import { Send } from "lucide-react";
 
 type Status = "idle" | "success" | "error";
-
-const inputClassName = [
-  "w-full rounded-md",
-  "border border-brand/15",
-  "bg-white px-4 py-3",
-  "text-sm text-charcoal",
-  "outline-none transition-colors",
-  "placeholder:text-charcoal/40",
-  "focus:border-forest",
-  "focus:ring-2",
-  "focus:ring-forest/10",
-].join(" ");
+type Feedback =
+  "invalid" | "unavailable" | "rateLimited" | "failed" | "success" | null;
 
 export default function ContactForm() {
-  const [pending, setPending] =
-    useState(false);
+  const t = useTranslations("ContactForm");
+  const common = useTranslations("Common");
 
-  const [status, setStatus] =
-    useState<Status>("idle");
+  const inputClassName = [
+    "w-full rounded-md",
+    "border border-brand/15",
+    "bg-white px-4 py-3",
+    "text-sm text-charcoal",
+    "outline-none transition-colors",
+    "placeholder:text-charcoal/40",
+    "focus:border-forest",
+    "focus:ring-2",
+    "focus:ring-forest/10",
+  ].join(" ");
 
-  const [feedback, setFeedback] =
-    useState("");
+  const [pending, setPending] = useState(false);
 
-  async function handleSubmit(
-    event: FormEvent<HTMLFormElement>,
-  ) {
+  const [status, setStatus] = useState<Status>("idle");
+
+  const [feedback, setFeedback] = useState<Feedback>(null);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (pending) return;
@@ -41,52 +38,55 @@ export default function ContactForm() {
     const form = event.currentTarget;
     const data = new FormData(form);
 
+    if (!form.checkValidity()) {
+      setStatus("error");
+      setFeedback("invalid");
+      form.querySelector<HTMLElement>(":invalid")?.focus();
+      return;
+    }
     setPending(true);
     setStatus("idle");
-    setFeedback("");
+    setFeedback(null);
 
     try {
-      const response = await fetch(
-        "/api/contact",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type":
-              "application/json",
-          },
-          body: JSON.stringify({
-            name: data.get("name"),
-            email: data.get("email"),
-            company: data.get("company"),
-            message: data.get("message"),
-            website: data.get("website"),
-          }),
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          company: data.get("company"),
+          message: data.get("message"),
+          website: data.get("website"),
+        }),
+      });
 
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(
-          result.error ||
-            "Unable to send your message.",
+        setStatus("error");
+        setFeedback(
+          response.status === 503
+            ? "unavailable"
+            : response.status === 429
+              ? "rateLimited"
+              : response.status === 400
+                ? "invalid"
+                : "failed",
         );
+        return;
       }
 
+      if (result.success !== true) throw new Error(common("failed"));
       setStatus("success");
-      setFeedback(
-        "Your inquiry has been " +
-          "submitted successfully.",
-      );
+      setFeedback("success");
 
       form.reset();
-    } catch (error) {
+    } catch {
       setStatus("error");
-      setFeedback(
-        error instanceof Error
-          ? error.message
-          : "Something went wrong.",
-      );
+      setFeedback("failed");
     } finally {
       setPending(false);
     }
@@ -102,39 +102,30 @@ export default function ContactForm() {
       ].join(" ")}
     >
       <h3
-        className={[
-          "font-heading text-xl",
-          "font-bold text-brand",
-        ].join(" ")}
+        className={["font-heading text-xl", "font-bold text-brand"].join(" ")}
       >
-        Send an Inquiry
+        {t("send_an_inquiry")}
       </h3>
 
-      <p
-        className={[
-          "mt-2 text-sm leading-6",
-          "text-charcoal/70",
-        ].join(" ")}
-      >
-        Tell us what you&apos;re looking
-        for and we&apos;ll be happy to
-        hear from you.
+      <p className={["mt-2 text-sm leading-6", "text-charcoal/70"].join(" ")}>
+        {t("tell_us_what_youre_looking_for_and")}
       </p>
 
       <form
+        noValidate
+        aria-describedby={status !== "idle" ? "contact-feedback" : undefined}
+        aria-busy={pending}
         onSubmit={handleSubmit}
         className="mt-6 space-y-4"
       >
         <div
           className={[
-            "absolute left-[9999px]",
+            "absolute -left-[9999px]",
             "h-px w-px overflow-hidden",
           ].join(" ")}
           aria-hidden="true"
         >
-          <label htmlFor="contact-website">
-            Website
-          </label>
+          <label htmlFor="contact-website">{t("website")}</label>
           <input
             id="contact-website"
             name="website"
@@ -144,12 +135,7 @@ export default function ContactForm() {
           />
         </div>
 
-        <div
-          className={[
-            "grid gap-4",
-            "sm:grid-cols-2",
-          ].join(" ")}
-        >
+        <div className={["grid gap-4", "sm:grid-cols-2"].join(" ")}>
           <div>
             <label
               htmlFor="contact-name"
@@ -158,7 +144,7 @@ export default function ContactForm() {
                 "font-semibold text-brand",
               ].join(" ")}
             >
-              Full Name *
+              {t("full_name")}
             </label>
 
             <input
@@ -169,7 +155,7 @@ export default function ContactForm() {
               minLength={2}
               maxLength={100}
               autoComplete="name"
-              placeholder="Your name"
+              placeholder={t("your_name")}
               className={inputClassName}
             />
           </div>
@@ -182,7 +168,7 @@ export default function ContactForm() {
                 "font-semibold text-brand",
               ].join(" ")}
             >
-              Email Address *
+              {t("email_address")}
             </label>
 
             <input
@@ -192,7 +178,7 @@ export default function ContactForm() {
               required
               maxLength={254}
               autoComplete="email"
-              placeholder="you@company.com"
+              placeholder={t("youcompanycom")}
               className={inputClassName}
             />
           </div>
@@ -201,12 +187,11 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="contact-company"
-            className={[
-              "mb-2 block text-xs",
-              "font-semibold text-brand",
-            ].join(" ")}
+            className={["mb-2 block text-xs", "font-semibold text-brand"].join(
+              " ",
+            )}
           >
-            Company
+            {t("company")}
           </label>
 
           <input
@@ -215,7 +200,7 @@ export default function ContactForm() {
             type="text"
             maxLength={150}
             autoComplete="organization"
-            placeholder="Company name"
+            placeholder={t("company_name")}
             className={inputClassName}
           />
         </div>
@@ -223,12 +208,11 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="contact-message"
-            className={[
-              "mb-2 block text-xs",
-              "font-semibold text-brand",
-            ].join(" ")}
+            className={["mb-2 block text-xs", "font-semibold text-brand"].join(
+              " ",
+            )}
           >
-            Your Message *
+            {t("your_message")}
           </label>
 
           <textarea
@@ -238,14 +222,8 @@ export default function ContactForm() {
             minLength={10}
             maxLength={5000}
             rows={5}
-            placeholder={
-              "Tell us about your " +
-              "material requirements..."
-            }
-            className={[
-              inputClassName,
-              "resize-y",
-            ].join(" ")}
+            placeholder={t("tell_us_about_your_material_requirements")}
+            className={[inputClassName, "resize-y"].join(" ")}
           />
         </div>
 
@@ -265,31 +243,25 @@ export default function ContactForm() {
             "disabled:opacity-60",
           ].join(" ")}
         >
-          {pending
-            ? "Sending..."
-            : "Send Inquiry"}
+          {pending ? t("sending") : t("send_inquiry")}
 
-          <Send
-            size={16}
-            aria-hidden="true"
-          />
+          <Send size={16} aria-hidden="true" />
         </button>
 
         {status !== "idle" && (
           <p
-            role={
-              status === "error"
-                ? "alert"
-                : "status"
-            }
+            id="contact-feedback"
+            role={status === "error" ? "alert" : "status"}
             className={[
               "text-sm leading-6",
-              status === "success"
-                ? "text-forest"
-                : "text-red-700",
+              status === "success" ? "text-forest" : "text-red-700",
             ].join(" ")}
           >
-            {feedback}
+            {feedback === "success"
+              ? t("your_inquiry_has_been_submitted_successfully")
+              : feedback
+                ? common(feedback)
+                : null}
           </p>
         )}
       </form>

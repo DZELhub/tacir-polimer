@@ -1,27 +1,30 @@
-
-const stats = [
-  {
-    value: "20K+",
-    label: "Tons",
-  },
-  {
-    value: "10+",
-    label: "Plastic Types",
-  },
-  {
-    value: "24+",
-    label: "Countries",
-  },
-  {
-    value: "200+",
-    label: "Connections",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export default function Stats() {
+  const t = useTranslations("Stats");
+
+  const stats = [
+    {
+      value: "20K+",
+      label: t("tons"),
+    },
+    {
+      value: "10+",
+      label: t("plastic_types"),
+    },
+    {
+      value: "24+",
+      label: t("countries"),
+    },
+    {
+      value: "200+",
+      label: t("connections"),
+    },
+  ];
+
   return (
     <section
-      aria-label="Tacir Polimer in numbers"
+      aria-label={t("tacir_polimer_in_numbers")}
       className="bg-brand py-10 lg:py-14"
     >
       <div className="container-custom">
@@ -34,7 +37,7 @@ export default function Stats() {
             "lg:mb-9",
           ].join(" ")}
         >
-          TACIR POLIMER IN NUMBERS
+          {t("tacir_polimer_in_numbers_")}
         </p>
 
         <div
@@ -51,9 +54,7 @@ export default function Stats() {
               className={[
                 "text-center",
                 "lg:px-6",
-                index !== 0
-                  ? "lg:border-l lg:border-white/15"
-                  : "",
+                index !== 0 ? "lg:border-l lg:border-white/15" : "",
               ].join(" ")}
             >
               <p

@@ -1,21 +1,20 @@
-
-const navigation = [
-  { label: "Home", href: "#home" },
-  { label: "Products", href: "#products" },
-  { label: "About", href: "#about" },
-  { label: "Solutions", href: "#solutions" },
-  { label: "Contact", href: "#contact" },
-];
-
-const companyLinkedIn =
-  "https://www.linkedin.com/" +
-  "company/tacir-polimer";
-
-const developerLinkedIn =
-  "https://www.linkedin.com/" +
-  "in/dzelalbinay";
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
+  const t = useTranslations("Footer");
+
+  const navigation = [
+    { label: t("home"), href: "#home" },
+    { label: t("products"), href: "#products" },
+    { label: t("about"), href: "#about" },
+    { label: t("solutions"), href: "#solutions" },
+    { label: t("contact"), href: "#contact" },
+  ];
+
+  const companyLinkedIn = "https://www.linkedin.com/" + "company/tacir-polimer";
+
+  const developerLinkedIn = "https://www.linkedin.com/" + "in/dzelalbinay";
+
   const year = new Date().getFullYear();
 
   return (
@@ -42,23 +41,18 @@ export default function Footer() {
             </a>
 
             <p
-              className={[
-                "mt-2 text-sm",
-                "leading-6 text-white/70",
-              ].join(" ")}
+              className={["mt-2 text-sm", "leading-6 text-white/70"].join(" ")}
             >
-              Connecting Materials.
+              {t("connecting_materials")}
               <br />
-              Creating Opportunities.
+              {t("creating_opportunities")}
             </p>
 
             <a
               href={companyLinkedIn}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={
-                "Tacir Polimer on LinkedIn"
-              }
+              aria-label={t("tacir_polimer_on_linkedin")}
               className={[
                 "mt-3 inline-flex",
                 "h-9 w-9 items-center",
@@ -110,12 +104,10 @@ export default function Footer() {
 
           {/* Compact navigation */}
           <nav
-            aria-label="Footer navigation"
-            className={[
-              "grid grid-cols-2",
-              "gap-x-8 gap-y-3",
-              "pt-1",
-            ].join(" ")}
+            aria-label={t("footer_navigation")}
+            className={["grid grid-cols-2", "gap-x-8 gap-y-3", "pt-1"].join(
+              " ",
+            )}
           >
             {navigation.map((link) => (
               <a
@@ -147,11 +139,11 @@ export default function Footer() {
         >
           <p className="text-xs text-white/60">
             © {year} Tacir Polimer.
-            All rights reserved.
+            {t("all_rights_reserved")}
           </p>
 
           <p className="text-xs text-white/60">
-            Designed &amp; Developed by{" "}
+            {t("designed_developed_by")}{" "}
             <a
               href={developerLinkedIn}
               target="_blank"

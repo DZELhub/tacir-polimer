@@ -1,58 +1,52 @@
+import { useTranslations } from "next-intl";
 
-import {
-  ArrowUpRight,
-  Building2,
-  Mail,
-  MapPin,
-  Phone,
-} from "lucide-react";
+import { ArrowUpRight, Building2, Mail, MapPin, Phone } from "lucide-react";
 
 import ContactForm from "./ContactForm";
 
-const mapUrl =
-  "https://www.google.com/maps/place/" +
-  "/data=!4m2!3m1!1s" +
-  "0x14caaf658890238b:" +
-  "0xcf807711d44238da";
-
-const contactDetails = [
-  {
-    label: "Address",
-    value:
-      "İkitelli O.S.B. Pik Dökümcüler " +
-      "Sitesi B3 Blok No: 16/1, " +
-      "34490 Başakşehir / İstanbul",
-    href: mapUrl,
-    icon: MapPin,
-    action: "View on Google Maps",
-    external: true,
-  },
-  {
-    label: "Email",
-    value: "info@tacirpolimer.com",
-    href: "mailto:info@tacirpolimer.com",
-    icon: Mail,
-    action: "Send an Email",
-    external: false,
-  },
-  {
-    label: "Phone",
-    value: "+90 212 485 44 85",
-    href: "tel:+902124854485",
-    icon: Phone,
-    action: "Call Us",
-    external: false,
-  },
-];
-
 export default function Contact() {
+  const t = useTranslations("Contact");
+
+  const mapUrl =
+    "https://www.google.com/maps/place/" +
+    "/data=!4m2!3m1!1s" +
+    "0x14caaf658890238b:" +
+    "0xcf807711d44238da";
+
+  const contactDetails = [
+    {
+      label: t("address"),
+      value:
+        "İkitelli O.S.B. Pik Dökümcüler " +
+        "Sitesi B3 Blok No: 16/1, " +
+        "34490 Başakşehir / İstanbul, Türkiye.",
+      href: mapUrl,
+      icon: MapPin,
+      action: t("view_on_google_maps"),
+      external: true,
+    },
+    {
+      label: t("email"),
+      value: "info@tacirpolimer.com",
+      href: "mailto:info@tacirpolimer.com",
+      icon: Mail,
+      action: t("send_an_email"),
+      external: false,
+    },
+    {
+      label: t("phone"),
+      value: "+90 212 485 44 85",
+      href: "tel:+902124854485",
+      icon: Phone,
+      action: t("call_us"),
+      external: false,
+    },
+  ];
+
   return (
     <section
       id="contact"
-      className={[
-        "scroll-mt-20 bg-white",
-        "py-12 lg:py-20",
-      ].join(" ")}
+      className={["bg-white", "py-12 lg:py-20"].join(" ")}
     >
       <div className="container-custom">
         <div className="mb-8 lg:mb-12">
@@ -64,7 +58,7 @@ export default function Contact() {
               "text-forest",
             ].join(" ")}
           >
-            CONTACT US
+            {t("contact_us")}
           </p>
 
           <h2
@@ -74,7 +68,7 @@ export default function Contact() {
               "text-brand sm:text-4xl",
             ].join(" ")}
           >
-            Let&apos;s Connect
+            {t("lets_connect")}
           </h2>
 
           <p
@@ -85,10 +79,7 @@ export default function Contact() {
               "sm:text-base",
             ].join(" ")}
           >
-            Looking for polymer materials
-            or interested in working with
-            us? Get in touch to discuss
-            your requirements.
+            {t("looking_for_polymer_materials_or_interested_in")}
           </p>
         </div>
 
@@ -116,11 +107,7 @@ export default function Contact() {
                   "text-brand",
                 ].join(" ")}
               >
-                <Building2
-                  size={21}
-                  strokeWidth={1.6}
-                  aria-hidden="true"
-                />
+                <Building2 size={21} strokeWidth={1.6} aria-hidden="true" />
               </div>
 
               <div>
@@ -133,12 +120,7 @@ export default function Contact() {
                   Tacir Polimer
                 </h3>
 
-                <p
-                  className={[
-                    "mt-1 text-sm",
-                    "text-charcoal/70",
-                  ].join(" ")}
-                >
+                <p className={["mt-1 text-sm", "text-charcoal/70"].join(" ")}>
                   Sanayi ve Ticaret A.Ş.
                 </p>
               </div>
@@ -149,10 +131,7 @@ export default function Contact() {
                 const Icon = detail.icon;
 
                 return (
-                  <div
-                    key={detail.label}
-                    className="flex gap-3"
-                  >
+                  <div key={detail.label} className="flex gap-3">
                     <div
                       className={[
                         "flex h-10 w-10",
@@ -162,11 +141,7 @@ export default function Contact() {
                         "text-brand",
                       ].join(" ")}
                     >
-                      <Icon
-                        size={19}
-                        strokeWidth={1.7}
-                        aria-hidden="true"
-                      />
+                      <Icon size={19} strokeWidth={1.7} aria-hidden="true" />
                     </div>
 
                     <div className="min-w-0">
@@ -192,15 +167,9 @@ export default function Contact() {
 
                       <a
                         href={detail.href}
-                        target={
-                          detail.external
-                            ? "_blank"
-                            : undefined
-                        }
+                        target={detail.external ? "_blank" : undefined}
                         rel={
-                          detail.external
-                            ? "noopener noreferrer"
-                            : undefined
+                          detail.external ? "noopener noreferrer" : undefined
                         }
                         className={[
                           "mt-2 inline-flex",
@@ -213,10 +182,7 @@ export default function Contact() {
                       >
                         {detail.action}
 
-                        <ArrowUpRight
-                          size={14}
-                          aria-hidden="true"
-                        />
+                        <ArrowUpRight size={14} aria-hidden="true" />
                       </a>
                     </div>
                   </div>

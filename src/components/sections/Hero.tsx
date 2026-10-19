@@ -1,89 +1,70 @@
-
 "use client";
+import { useTranslations } from "next-intl";
 
 import Image from "next/image";
-import {
-  useEffect,
-  useState,
-} from "react";
-
-const slides = [
-  {
-    src: "/images/hero/polymer-granules-01.webp",
-    alt: "Translucent polymer pellets",
-  },
-  {
-    src: "/images/hero/polymer-granules-02.webp",
-    alt: "White polymer granules",
-  },
-  {
-    src: "/images/hero/polymer-granules-03.webp",
-    alt: "Natural polymer resin pellets",
-  },
-];
-
-const INTERVAL = 6500;
+import { useEffect, useState } from "react";
 
 export default function Hero() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [pageVisible, setPageVisible] =
-    useState(true);
+  const t = useTranslations("Hero");
+  const common = useTranslations("Common");
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
 
+  const slides = [
+    {
+      src: "/images/hero/polymer-granules-01.webp",
+      alt: t("translucent_polymer_pellets"),
+    },
+    {
+      src: "/images/hero/polymer-granules-02.webp",
+      alt: t("white_polymer_granules"),
+    },
+    {
+      src: "/images/hero/polymer-granules-03.webp",
+      alt: t("natural_polymer_resin_pellets"),
+    },
+  ];
+
+  const INTERVAL = 6500;
+
+  const [active, setActive] = useState(0);
+  const paused = hovered || focused;
+  const [pageVisible, setPageVisible] = useState(true);
 
   useEffect(() => {
-  const updateVisibility = () => {
-    setPageVisible(!document.hidden);
-  };
+    const updateVisibility = () => {
+      setPageVisible(!document.hidden);
+    };
 
-  updateVisibility();
+    updateVisibility();
 
-  document.addEventListener(
-    "visibilitychange",
-    updateVisibility
-  );
+    document.addEventListener("visibilitychange", updateVisibility);
 
-  return () => {
-    document.removeEventListener(
-      "visibilitychange",
-      updateVisibility
-    );
-  };
-}, []);
+    return () => {
+      document.removeEventListener("visibilitychange", updateVisibility);
+    };
+  }, []);
 
-  
+  useEffect(() => {
+    if (paused || !pageVisible) {
+      return;
+    }
 
-useEffect(() => {
-  if (paused || !pageVisible) {
-    return;
-  }
+    const timer = window.setTimeout(() => {
+      setActive((current) => (current + 1) % slides.length);
+    }, INTERVAL);
 
-  const timer = window.setTimeout(
-    () => {
-      setActive(
-        (current) =>
-          (current + 1) % slides.length
-      );
-    },
-    INTERVAL
-  );
-
-  return () => {
-    window.clearTimeout(timer);
-  };
-}, [active, paused, pageVisible]);
-
-
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, [active, paused, pageVisible, slides.length]);
 
   const selectSlide = (index: number) => {
     setActive(index);
   };
 
   return (
-    <section
-      id="home"
-      className="py-10 sm:py-14 lg:py-20"
-    >
+    <section id="home" className="py-10 sm:py-14 lg:py-20">
       <div
         className={[
           "container-custom grid",
@@ -115,9 +96,9 @@ useEffect(() => {
               "xl:text-[3.25rem]",
             ].join(" ")}
           >
-            Connecting Materials.
+            {t("connecting_materials")}
             <br />
-            Creating Opportunities.
+            {t("creating_opportunities")}
           </h1>
 
           <p
@@ -129,10 +110,7 @@ useEffect(() => {
               "lg:mt-6",
             ].join(" ")}
           >
-            Reliable polymer trading and
-            sourcing solutions, connecting
-            businesses across European
-            markets.
+            {t("reliable_polymer_trading_and_sourcing_solutions_connecting")}
           </p>
 
           <div
@@ -155,7 +133,7 @@ useEffect(() => {
                 "sm:text-sm",
               ].join(" ")}
             >
-              Explore Products
+              {t("explore_products")}
             </a>
 
             <a
@@ -172,23 +150,19 @@ useEffect(() => {
                 "sm:text-sm",
               ].join(" ")}
             >
-              Get in Touch
+              {t("get_in_touch")}
             </a>
           </div>
         </div>
 
         <div
           className="min-w-0"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onFocusCapture={() => setPaused(true)}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          onFocusCapture={() => setFocused(true)}
           onBlurCapture={(event) => {
-            if (
-              !event.currentTarget.contains(
-                event.relatedTarget
-              )
-            ) {
-              setPaused(false);
+            if (!event.currentTarget.contains(event.relatedTarget)) {
+              setFocused(false);
             }
           }}
         >
@@ -204,7 +178,8 @@ useEffect(() => {
               <Image
                 key={slide.src}
                 src={slide.src}
-                alt={slide.alt}
+                alt={index === active ? slide.alt : ""}
+                aria-hidden={index !== active}
                 fill
                 priority={index === 0}
                 sizes={[
@@ -217,40 +192,31 @@ useEffect(() => {
                   "transition-opacity",
                   "duration-700",
                   "motion-reduce:transition-none",
-                  index === active
-                    ? "opacity-100"
-                    : "opacity-0",
+                  index === active ? "opacity-100" : "opacity-0",
                 ].join(" ")}
               />
             ))}
           </div>
 
           <div
-            className={[
-              "mt-3 flex",
-              "justify-center gap-2",
-              "lg:mt-5",
-            ].join(" ")}
-            aria-label="Hero image selection"
+            className={["mt-3 flex", "justify-center gap-2", "lg:mt-5"].join(
+              " ",
+            )}
+            role="group"
+            aria-label={t("hero_image_selection")}
           >
             {slides.map((slide, index) => (
               <button
                 key={slide.src}
                 type="button"
-                onClick={() =>
-                  selectSlide(index)
-                }
-                aria-label={
-                  `Show image ${index + 1}`
-                }
+                onClick={() => selectSlide(index)}
+                aria-label={common("showImage", { number: index + 1 })}
                 aria-pressed={active === index}
                 className={[
                   "h-2 rounded-full",
                   "transition-all",
                   "motion-reduce:transition-none",
-                  active === index
-                    ? "w-7 bg-brand"
-                    : "w-2 bg-brand/20",
+                  active === index ? "w-7 bg-brand" : "w-2 bg-brand/20",
                 ].join(" ")}
               />
             ))}
