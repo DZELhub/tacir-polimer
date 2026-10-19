@@ -1,26 +1,88 @@
+
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brand: #103010;
+  --forest: #24543a;
+  --sage: #e8efe8;
+  --surface: #f7f9f6;
+  --charcoal: #253029;
+  --white: #ffffff;
+
+  --container-width: 1200px;
+  --section-spacing: 112px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-brand: var(--brand);
+  --color-forest: var(--forest);
+  --color-sage: var(--sage);
+  --color-surface: var(--surface);
+  --color-charcoal: var(--charcoal);
+
+  --font-heading: var(--font-manrope);
+  --font-body: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--surface);
+  color: var(--charcoal);
+  font-family: var(--font-inter), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-manrope), sans-serif;
+  color: var(--brand);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+.container-custom {
+  width: min(100% - 48px, var(--container-width));
+  margin-inline: auto;
+}
+
+.section-spacing {
+  padding-block: var(--section-spacing);
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --section-spacing: 80px;
+  }
+}
+
+@media (max-width: 639px) {
+  :root {
+    --section-spacing: 64px;
+  }
+
+  .container-custom {
+    width: min(100% - 32px, var(--container-width));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
