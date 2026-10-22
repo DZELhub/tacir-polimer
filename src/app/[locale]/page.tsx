@@ -4,6 +4,8 @@ import Products from "@/components/sections/Products";
 import About from "@/components/sections/About";
 import Stats from "@/components/sections/Stats";
 import Solutions from "@/components/sections/Solutions";
+import Principles from "@/components/sections/Principles";
+import Partners from "@/components/sections/Partners";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/layout/Footer";
 
@@ -18,6 +20,8 @@ export default function Home() {
         <About />
         <Stats />
         <Solutions />
+        <Principles />
+        <Partners />
         <Contact />
       </main>
       <Footer />

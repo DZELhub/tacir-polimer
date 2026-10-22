@@ -256,7 +256,7 @@ export default function Products() {
 
                 <p
                   className={[
-                    "mt-1 min-h-10 [overflow-wrap:anywhere]",
+                    "mt-1 min-h-10 wrap-anywhere",
                     "text-[11px] leading-4",
                     "text-charcoal/70",
                     "sm:text-xs sm:leading-5",

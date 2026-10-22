@@ -13,6 +13,8 @@ export default function Navbar() {
     { label: t("products"), href: "#products" },
     { label: t("about"), href: "#about" },
     { label: t("solutions"), href: "#solutions" },
+    { label: t("principles"), href: "#principles" },
+    { label: t("partners"), href: "#partners" },
     { label: t("contact"), href: "#contact" },
   ];
 
@@ -28,9 +30,22 @@ export default function Navbar() {
   const header = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const sections = ["home", "products", "about", "solutions", "contact"]
+    const sections = [
+      "home",
+      "products",
+      "about",
+      "solutions",
+      "principles",
+      "partners",
+      "contact",
+    ]
       .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => section !== null);
+
+    const linkedSection = sections.find(
+      (section) => section.id === window.location.hash.slice(1),
+    );
+    linkedSection?.scrollIntoView({ behavior: "instant", block: "start" });
 
     const updateActiveSection = () => {
       const offset = 140;

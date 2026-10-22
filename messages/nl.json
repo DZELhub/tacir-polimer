@@ -4,6 +4,8 @@
     "products": "Producten",
     "about": "Over ons",
     "solutions": "Oplossingen",
+    "principles": "Principes",
+    "partners": "Partners",
     "contact": "Contact",
     "main_navigation": "Hoofdnavigatie",
     "tacir_polimer_home": "Tacir Polimer – Home",
@@ -17,6 +19,8 @@
     "products": "Producten",
     "about": "Over ons",
     "solutions": "Oplossingen",
+    "principles": "Principes",
+    "partners": "Partners",
     "contact": "Contact",
     "tacir_polimer_on_linkedin": "Tacir Polimer op LinkedIn",
     "footer_navigation": "Footernavigatie",
@@ -151,5 +155,35 @@
     "description": "Betrouwbare handel en inkoop van polymeren voor Europese markten.",
     "pause": "Diavoorstelling pauzeren",
     "play": "Diavoorstelling starten"
+  },
+  "Partners": {
+    "eyebrow": "ONS NETWERK",
+    "heading": "Onze partners",
+    "description": "We bouwen relaties op binnen de internationale polymeerindustrie door zakelijke contacten en een gedeeld inzicht in de behoeften van de markt."
+  },
+  "Principles": {
+    "eyebrow": "ONZE PRINCIPES",
+    "heading": "Verantwoord denken. Duurzame perspectieven.",
+    "introduction": {
+      "partnerships": "Bij Tacir Polimer geloven we dat verantwoord zakendoen en langdurige partnerschappen essentieel zijn voor de toekomst van de polymeerindustrie.",
+      "market": "In een veranderende internationale markt erkennen we het groeiende belang van milieubewustzijn, efficiënt grondstoffengebruik en verantwoord handelen binnen de toeleveringsketen.",
+      "guidance": "Vier leidende principes geven vorm aan onze bedrijfsfilosofie."
+    },
+    "environmental_awareness": {
+      "title": "Milieubewustzijn",
+      "description": "We erkennen de milieuvraagstukken binnen de kunststofindustrie en het belang van aandacht voor milieuaspecten in een veranderende wereldmarkt."
+    },
+    "circular_economy": {
+      "title": "Visie op de circulaire economie",
+      "description": "We erkennen de groeiende rol van recycling, materiaalterugwinning en circulaire benaderingen in de toekomst van polymeermaterialen en hun toepassingen."
+    },
+    "responsible_sourcing": {
+      "title": "Verantwoorde inkoop",
+      "description": "We hechten waarde aan weloverwogen inkoopbeslissingen, heldere communicatie en bewustzijn van veranderende marktverwachtingen en wettelijke vereisten."
+    },
+    "business_integrity": {
+      "title": "Integer zakendoen",
+      "description": "We geloven dat transparantie, wederzijds vertrouwen en langdurige relaties de basis vormen voor verantwoorde internationale handel."
+    }
   }
 }

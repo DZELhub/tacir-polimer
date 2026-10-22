@@ -8,6 +8,8 @@ export default function Footer() {
     { label: t("products"), href: "#products" },
     { label: t("about"), href: "#about" },
     { label: t("solutions"), href: "#solutions" },
+    { label: t("principles"), href: "#principles" },
+    { label: t("partners"), href: "#partners" },
     { label: t("contact"), href: "#contact" },
   ];
 

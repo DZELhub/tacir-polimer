@@ -64,7 +64,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="py-10 sm:py-14 lg:py-20">
+    <section id="home" className="bg-surface py-10 sm:py-14 lg:py-20">
       <div
         className={[
           "container-custom grid",

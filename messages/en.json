@@ -4,6 +4,8 @@
     "products": "Products",
     "about": "About",
     "solutions": "Solutions",
+    "principles": "Principles",
+    "partners": "Partners",
     "contact": "Contact",
     "main_navigation": "Main navigation",
     "tacir_polimer_home": "Tacir Polimer Home",
@@ -17,6 +19,8 @@
     "products": "Products",
     "about": "About",
     "solutions": "Solutions",
+    "principles": "Principles",
+    "partners": "Partners",
     "contact": "Contact",
     "tacir_polimer_on_linkedin": "Tacir Polimer on LinkedIn",
     "footer_navigation": "Footer navigation",
@@ -151,5 +155,35 @@
     "description": "Reliable polymer trading and sourcing solutions across European markets.",
     "pause": "Pause slideshow",
     "play": "Play slideshow"
+  },
+  "Partners": {
+    "eyebrow": "OUR NETWORK",
+    "heading": "Our Partners",
+    "description": "Building connections across the international polymer industry through business relationships and a shared understanding of market needs."
+  },
+  "Principles": {
+    "eyebrow": "OUR PRINCIPLES",
+    "heading": "Responsible Thinking. Sustainable Perspectives.",
+    "introduction": {
+      "partnerships": "At Tacir Polimer, we believe that responsible business practices and long-term partnerships are essential to the future of the polymer industry.",
+      "market": "Operating within an evolving international market, we recognize the growing importance of environmental awareness, resource efficiency, and responsible supply chain practices.",
+      "guidance": "Our business philosophy is shaped by four guiding principles."
+    },
+    "environmental_awareness": {
+      "title": "Environmental Awareness",
+      "description": "We recognize the environmental challenges associated with the plastics industry and the importance of considering environmental factors in an evolving global marketplace."
+    },
+    "circular_economy": {
+      "title": "Circular Economy Perspective",
+      "description": "We acknowledge the growing role of recycling, material recovery, and circular economy approaches in the future of polymer materials and their applications."
+    },
+    "responsible_sourcing": {
+      "title": "Responsible Sourcing",
+      "description": "We value informed sourcing decisions, clear communication, and an awareness of changing market expectations and regulatory requirements."
+    },
+    "business_integrity": {
+      "title": "Business Integrity",
+      "description": "We believe that transparency, mutual trust, and long-term relationships are fundamental to responsible international trade."
+    }
   }
 }

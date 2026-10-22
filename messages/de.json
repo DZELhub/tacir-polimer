@@ -4,6 +4,8 @@
     "products": "Produkte",
     "about": "Über uns",
     "solutions": "Lösungen",
+    "principles": "Grundsätze",
+    "partners": "Partner",
     "contact": "Kontakt",
     "main_navigation": "Hauptnavigation",
     "tacir_polimer_home": "Tacir Polimer – Startseite",
@@ -17,6 +19,8 @@
     "products": "Produkte",
     "about": "Über uns",
     "solutions": "Lösungen",
+    "principles": "Grundsätze",
+    "partners": "Partner",
     "contact": "Kontakt",
     "tacir_polimer_on_linkedin": "Tacir Polimer auf LinkedIn",
     "footer_navigation": "Navigation im Footer",
@@ -151,5 +155,35 @@
     "description": "Zuverlässiger Polymerhandel und bedarfsgerechte Beschaffung für europäische Märkte.",
     "pause": "Diashow pausieren",
     "play": "Diashow starten"
+  },
+  "Partners": {
+    "eyebrow": "UNSER NETZWERK",
+    "heading": "Unsere Partner",
+    "description": "Geschäftsbeziehungen und ein gemeinsames Verständnis der Marktbedürfnisse verbinden uns mit Unternehmen der internationalen Polymerbranche."
+  },
+  "Principles": {
+    "eyebrow": "UNSERE GRUNDSÄTZE",
+    "heading": "Verantwortungsvoll denken. Nachhaltige Perspektiven.",
+    "introduction": {
+      "partnerships": "Bei Tacir Polimer sind wir davon überzeugt, dass verantwortungsvolles unternehmerisches Handeln und langfristige Partnerschaften für die Zukunft der Polymerbranche wesentlich sind.",
+      "market": "In einem sich wandelnden internationalen Markt erkennen wir die wachsende Bedeutung von Umweltbewusstsein, Ressourceneffizienz und verantwortungsvollem Handeln entlang der Lieferkette an.",
+      "guidance": "Vier Grundsätze prägen unsere Unternehmensphilosophie."
+    },
+    "environmental_awareness": {
+      "title": "Umweltbewusstsein",
+      "description": "Wir erkennen die ökologischen Herausforderungen der Kunststoffbranche an und halten es für wichtig, Umweltaspekte in einem sich wandelnden globalen Markt zu berücksichtigen."
+    },
+    "circular_economy": {
+      "title": "Perspektive Kreislaufwirtschaft",
+      "description": "Wir erkennen die wachsende Rolle von Recycling, Materialrückgewinnung und kreislaufwirtschaftlichen Ansätzen für die Zukunft von Polymermaterialien und ihren Anwendungen an."
+    },
+    "responsible_sourcing": {
+      "title": "Verantwortungsvolle Beschaffung",
+      "description": "Wir legen Wert auf fundierte Beschaffungsentscheidungen, klare Kommunikation und ein Bewusstsein für sich wandelnde Markterwartungen und regulatorische Anforderungen."
+    },
+    "business_integrity": {
+      "title": "Integrität im Geschäftsleben",
+      "description": "Wir sind davon überzeugt, dass Transparenz, gegenseitiges Vertrauen und langfristige Beziehungen die Grundlage für verantwortungsvollen internationalen Handel bilden."
+    }
   }
 }
