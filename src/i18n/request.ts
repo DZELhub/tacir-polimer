@@ -9,7 +9,7 @@ export default getRequestConfig(async ({ locale }) => {
   if (!hasLocale(routing.locales, requested)) notFound();
   return {
     locale: requested,
-    messages: (await import(`../../messages/${requested}.json`)).default,
+    messages: (await import(`../locales/${requested}.json`)).default,
     timeZone: "Europe/Istanbul",
   };
 });

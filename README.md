@@ -13,11 +13,16 @@ bun run dev
 ```
 
 The homepage redirects to `/en`. `/de` and `/nl` use the same page and section
-components with dictionaries in `messages/`. Unknown locale prefixes return 404.
+components with dictionaries in `src/locales/`. Unknown locale prefixes return 404.
 `src/i18n/request.ts` reads the locale through `next/root-params`, supported by
 Next.js 16.4. Server sections remain Server Components; only interactive sections
 receive translation namespaces in the client provider. The language selector
 uses client navigation and preserves the query and hash.
+
+The homepage imports its rendering entry points from `src/sections`. Each
+section delegates to a feature under `src/features`, while shared layout
+components live in `src/shared` and static definitions in `src/data`.
+See `ARCHITECTURE.md` for the directory tree, boundaries and refactor validation.
 
 ## Environment and deployment
 

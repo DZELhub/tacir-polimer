@@ -5,7 +5,8 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import BackToTop from "@/components/layout/BackToTop";
+import { BackToTop } from "@/shared";
+import { company } from "@/data";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -51,7 +52,7 @@ export async function generateMetadata({
     openGraph: {
       title: t("title"),
       description: t("description"),
-      siteName: "Tacir Polimer",
+      siteName: company.name,
       type: "website",
       locale: { en: "en_GB", de: "de_DE", nl: "nl_NL" }[locale],
       alternateLocale: routing.locales

@@ -1,13 +1,14 @@
-import Navbar from "@/components/layout/Navbar";
-import Hero from "@/components/sections/Hero";
-import Products from "@/components/sections/Products";
-import About from "@/components/sections/About";
-import Stats from "@/components/sections/Stats";
-import Solutions from "@/components/sections/Solutions";
-import Principles from "@/components/sections/Principles";
-import Partners from "@/components/sections/Partners";
-import Contact from "@/components/sections/Contact";
-import Footer from "@/components/layout/Footer";
+import { Navbar, Footer } from "@/shared";
+import {
+  Hero,
+  Products,
+  About,
+  Stats,
+  Solutions,
+  Principles,
+  Partners,
+  Contact,
+} from "@/sections";
 
 export default function Home() {
   return (
