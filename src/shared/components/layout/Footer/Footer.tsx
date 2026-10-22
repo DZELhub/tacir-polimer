@@ -1,66 +1,31 @@
 import { useTranslations } from "next-intl";
-import {
-  company,
-  developerCredit,
-  navigation as navigationItems,
-} from "@/data";
+import { company, developerCredit } from "@/data";
 
 export default function Footer() {
   const t = useTranslations("Footer");
-
-  const navigation = navigationItems
-    .filter((item) => item.visibleIn?.includes("footer") ?? true)
-    .sort((a, b) => a.order - b.order)
-    .map((item) => ({ ...item, label: t(item.translationKey) }));
-
   const year = new Date().getFullYear();
 
   return (
     <footer className="bg-brand text-white">
       <div className="container-custom">
-        <div
-          className={[
-            "grid gap-8 py-8",
-            "md:grid-cols-2",
-            "md:items-start",
-            "md:gap-12 md:py-10",
-          ].join(" ")}
-        >
-          {/* Brand and social media */}
-          <div>
-            <a
-              href="#home"
-              className={[
-                "font-heading text-xl",
-                "font-bold tracking-tight",
-              ].join(" ")}
-            >
+        <div className="flex flex-col gap-3 py-3 md:flex-row md:items-center md:justify-between md:gap-6">
+          <div className="min-w-0">
+            <p className="font-heading text-xl font-bold tracking-tight">
               {company.brandName}
-            </a>
-
-            <p
-              className={["mt-2 text-sm", "leading-6 text-white/70"].join(" ")}
-            >
-              {t("connecting_materials")}
-              <br />
+            </p>
+            <p className="text-sm leading-5 text-white/70">
+              {t("connecting_materials")}{" "}
               {t("creating_opportunities")}
             </p>
+          </div>
 
+          <div className="flex min-w-0 items-center gap-3 md:justify-end">
             <a
               href={company.linkedIn}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t("tacir_polimer_on_linkedin")}
-              className={[
-                "mt-3 inline-flex",
-                "h-9 w-9 items-center",
-                "justify-center rounded-md",
-                "border border-white/25",
-                "text-white/80",
-                "transition-colors",
-                "hover:bg-white/10",
-                "hover:text-white",
-              ].join(" ")}
+              className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-white/25 text-white/80 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               <svg
                 aria-hidden="true"
@@ -98,58 +63,20 @@ export default function Footer() {
                 />
               </svg>
             </a>
+            <p className="text-xs leading-5 text-white/60">
+              © {year} {company.name}. {t("all_rights_reserved")}
+            </p>
           </div>
-
-          {/* Compact navigation */}
-          <nav
-            aria-label={t("footer_navigation")}
-            className={["grid grid-cols-2", "gap-x-8 gap-y-3", "pt-1"].join(
-              " ",
-            )}
-          >
-            {navigation.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={[
-                  "w-fit text-sm",
-                  "text-white/75",
-                  "transition-colors",
-                  "hover:text-white",
-                ].join(" ")}
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
         </div>
 
-        {/* Copyright and developer credit */}
-        <div
-          className={[
-            "flex flex-col gap-2",
-            "border-t border-white/20",
-            "py-4",
-            "md:flex-row",
-            "md:items-center",
-            "md:justify-between",
-          ].join(" ")}
-        >
-          <p className="text-xs text-white/60">
-            © {year} {company.name}.{t("all_rights_reserved")}
-          </p>
-
-          <p className="text-xs text-white/60">
+        <div className="flex min-h-11 items-center border-t border-white/20 md:justify-end">
+          <p className="text-xs leading-5 text-white/60">
             {t("designed_developed_by")}{" "}
             <a
               href={developerCredit.linkedIn}
               target="_blank"
               rel="noopener noreferrer"
-              className={[
-                "font-semibold text-white",
-                "transition-colors",
-                "hover:text-[#B9D8BD]",
-              ].join(" ")}
+              className="inline-flex min-h-11 items-center font-semibold text-white transition-colors hover:text-[#B9D8BD] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               {developerCredit.label}
             </a>
